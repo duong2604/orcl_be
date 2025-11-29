@@ -23,6 +23,13 @@ export class ProductsService {
     });
   }
 
+  async findByCategory(categoryId: number): Promise<Product[]> {
+    return this.productRepository.find({
+      where: { categoryId },
+      relations: ['category'],
+    });
+  }
+
   async create(dto: CreateProductDto): Promise<Product> {
     const product = this.productRepository.create(dto);
     return this.productRepository.save(product);

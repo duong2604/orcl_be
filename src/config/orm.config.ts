@@ -10,8 +10,9 @@ export default registerAs(
     port: parseInt(process.env.DB_PORT || '1521', 10),
     username: process.env.DB_USERNAME || 'SHOP',
     password: process.env.DB_PASSWORD || '123456',
-    sid: process.env.DB_SID || 'ORCL',
-    connectString: `${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_SID}`,
+    ...(process.env.DB_SERVICE_NAME
+      ? { serviceName: process.env.DB_SERVICE_NAME }
+      : { sid: process.env.DB_SID || 'ORCL' }),
     autoLoadEntities: true,
     synchronize: false,
     logging: true,

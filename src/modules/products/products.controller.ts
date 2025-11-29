@@ -21,6 +21,11 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
+  @Get('category/:categoryId')
+  findByCategory(@Param('categoryId', ParseIntPipe) categoryId: number) {
+    return this.productsService.findByCategory(categoryId);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.findOne(id);

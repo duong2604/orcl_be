@@ -10,7 +10,9 @@ export default new DataSource({
   port: parseInt(process.env.DB_PORT || '1521', 10),
   username: process.env.DB_USERNAME || 'SHOP',
   password: process.env.DB_PASSWORD || '123456',
-  sid: process.env.DB_SID || 'ORCL',
+  ...(process.env.DB_SERVICE_NAME
+    ? { serviceName: process.env.DB_SERVICE_NAME }
+    : { sid: process.env.DB_SID || 'ORCL' }),
   synchronize: false,
   logging: false,
   entities: ['src/**/*.entity.ts'],
